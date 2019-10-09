@@ -22,8 +22,10 @@ _start:
 		.word TID_H			@ 	Tidhigh of system dsiware
 	.word POP_R2PC				@ 	
 		.word dsINT			@ 	Address of export's string (below)
-	.word POP_R3PC				@ 
-		.word WBUFF			@ 	128KB workbuff supplied to AM_TwlExport
+		.word WBUFF
+		.word GARBAGE
+		.word GARBAGE
+		.word GARBAGE
 	.word AM_TwlExport			@   	AM_TwlExport(u32 tidlow, u32 tidhigh, char *export_path, *wbuff)
 		.word GARBAGE			@	r4
 		.word GARBAGE			@	r5
@@ -41,6 +43,10 @@ _start:
 		.word HWREGS_ADDR      		@ 	Register address for bottom screen coloring
 	.word POP_R2PC          		@
 		.word MAGENTA_ADDR  		@	Existing location of magenta color 
+		.word GARBAGE
+		.word GARBAGE
+		.word GARBAGE
+		.word GARBAGE
 	.word GSPGPU_WriteHWRegs		@   	GSPGPU_WriteHWRegs(&GSPHandle, HwRegsAddress, &MagentaAddr, size=4)
 		.word GARBAGE	    		@ 	r4
 		.word GARBAGE	    		@ 	r5
@@ -51,7 +57,7 @@ _start:
 		.word 0xFFFFFFFF		@	r0 ... r1 is zeroed above
 	.word svcSleepThread			@   	svcSleepThread(u64 0x00000000FFFFFFFF) this is about 4 seconds.
 		
-	
+	//-8 + 
 		
 dsINT: // this is "sdmc:/42383841.bin" wchar in ascii.  I had to do it this way to avoid a wchar null at the end
 	.ascii "s\0","d\0","m\0","c\0",":\0","/\0","4\0","2\0","3\0","8\0","3\0","8\0","4\0","1\0",".\0","b\0","i\0","n\0" 
